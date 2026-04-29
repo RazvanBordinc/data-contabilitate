@@ -1,36 +1,62 @@
-# Fiscal config
+# data-contabilitate
 
-Cote și plafoane fiscale, centralizate pentru toate site-urile de contabilitate.
+Cote și plafoane fiscale pentru România, centralizate într-un singur fișier folosit de toate site-urile de contabilitate.
+
+## Structură
+
+Un singur fișier: **`current.json`**.
+
+Câmpul `year` din interior arată anul valid. Istoricul versiunilor e disponibil prin git (`git log`, `git show <commit>:current.json`).
 
 ## Cum se folosește
 
-1. **În producție**: găzduit pe GitHub într-un repo separat (ex: `cifrapro/fiscal-config`).
-2. **Citit prin jsDelivr CDN**, fără rate limit:
-   ```
-   https://cdn.jsdelivr.net/gh/USER/REPO@main/2026.json
-   ```
-3. **Update**: schimbi `2026.json` în repo, comiti, deploy automat. Toate site-urile preiau în 24h (cache `revalidate`).
+Site-urile fac fetch de la jsDelivr CDN, fără rate limit:
+
+```
+https://cdn.jsdelivr.net/gh/RazvanBordinc/data-contabilitate@main/current.json
+```
+
+În Next.js, cu cache de 24h:
+
+```ts
+const res = await fetch(
+  'https://cdn.jsdelivr.net/gh/RazvanBordinc/data-contabilitate@main/current.json',
+  { next: { revalidate: 86400 } }
+);
+const config = await res.json();
+```
+
+## Update anual
+
+La schimbarea cotelor (an nou, modificare legislativă):
+
+1. Editezi `current.json` cu noile valori și actualizezi `year`, `version`, `lastUpdated`.
+2. `git commit -m "update: cote 2027"` și `git push`.
+3. jsDelivr refresh în câteva minute, site-urile preiau în 24h.
+
+## Versionare strictă (opțional)
+
+Folosește tag-uri git pentru versiuni stabile:
+
+```bash
+git tag v2026.1
+git push origin v2026.1
+```
+
+Apoi un site poate fixa o versiune anume:
+
+```
+https://cdn.jsdelivr.net/gh/RazvanBordinc/data-contabilitate@v2026.1/current.json
+```
 
 ## Convenții
 
-- Un fișier per an: `2025.json`, `2026.json`, `2027.json`.
-- `current.json` = symlink (sau copie) către anul curent. Site-urile citesc `current.json`.
-- Toate cotele sunt fracții (0.25, nu 25). Multiplicarea cu 100 se face în UI.
+- Toate cotele sunt fracții (`0.25` nu `25`). Multiplicarea cu 100 se face în UI.
 - Sumele monetare sunt în RON, fără separator de mii.
-
-## Versionare
-
-Câmpul `version` urmează formatul `<an>.<patch>`:
-- `2026.1` = prima publicare a cotelor pe 2026
-- `2026.2` = corecție (de ex., schimbare salariu minim mid-year)
-
-Folosește tag-uri git (`v2026.1`) pentru a forța o versiune specifică:
-```
-https://cdn.jsdelivr.net/gh/USER/REPO@v2026.1/2026.json
-```
+- Câmpul `version` urmează `<an>.<patch>`: `2026.1`, `2026.2` (corecție mid-year), `2027.1` etc.
 
 ## Ce NU pune aici
 
 - Logică de calcul (rămâne în cod).
 - Texte de UI (rămân în config-ul fiecărui site).
-- Date personale sau firme (cote, doar cote).
+- Date personale sau firme.
