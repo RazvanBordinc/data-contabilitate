@@ -1,9 +1,9 @@
 {
-  "version": "2026.1",
+  "version": "2026.2",
   "year": 2026,
   "lastUpdated": "2026-04-29",
   "currency": "RON",
-  "notes": "Cote și plafoane fiscale pentru anul 2026. Sursă: Codul fiscal al României. Consultă întotdeauna un contabil pentru cazuri specifice.",
+  "notes": "Cote și plafoane fiscale aplicabile în România la data lastUpdated. Sursă: Codul fiscal, OUG 89/2025, OUG 8/2026, Legea 141/2025. Consultă întotdeauna un contabil pentru cazuri specifice.",
 
   "salariuMinim": {
     "brutLunar": 4050,
@@ -17,13 +17,13 @@
       "label": "CAS (Asigurări Sociale)",
       "cota": 0.25,
       "platitor": "angajat",
-      "descriere": "Contribuție pentru pensii. Se reține din salariul brut sau se plătește de PFA dacă veniturile depășesc plafoanele."
+      "descriere": "Contribuție pentru pensii. Se reține din salariul brut sau se plătește de PFA dacă veniturile depășesc plafoanele anuale."
     },
     "cass": {
       "label": "CASS (Asigurări Sociale de Sănătate)",
       "cota": 0.10,
       "platitor": "angajat",
-      "descriere": "Contribuție pentru sănătate. Se reține din salariul brut sau se plătește de PFA dacă veniturile depășesc plafonul."
+      "descriere": "Contribuție pentru sănătate. Se reține din salariul brut sau se plătește de PFA dacă veniturile depășesc plafonul anual."
     },
     "cam": {
       "label": "CAM (Asiguratorie pentru Muncă)",
@@ -46,63 +46,98 @@
     },
     "dividende": {
       "label": "Impozit pe dividende",
-      "cotaPersoaneFizice": 0.08,
-      "descriere": "Cota reținută la sursă când firma distribuie dividende către persoane fizice."
+      "cotaPersoaneFizice": 0.16,
+      "descriere": "Cota reținută la sursă când firma distribuie dividende. Crescut de la 10% la 16% din 1 ianuarie 2026."
     },
     "tva": {
       "label": "TVA",
-      "cotaStandard": 0.19,
-      "cotaRedusa": 0.09,
-      "cotaSuperRedusa": 0.05,
-      "plafonInregistrare": 300000,
+      "cotaStandard": 0.21,
+      "cotaRedusa": 0.11,
+      "cotaTranzitorieLocuinte": 0.09,
+      "dataIncetareCotaTranzitorie": "2026-07-31",
+      "plafonInregistrare": 395000,
       "plafonUnitate": "lei/an",
-      "descriere": "Cota standard 19%, redusă 9% (alimente, medicamente, cărți), super-redusă 5% (locuințe sociale, anumite servicii)."
+      "descriere": "Cotă standard 21% (din 1 august 2025), redusă 11% pentru alimente, medicamente, cărți, restaurante și hoteluri. Cota tranzitorie de 9% se aplică doar pentru livrarea anumitor locuințe noi, până la 31 iulie 2026. Cota de 5% a fost eliminată."
     }
   },
 
   "deducerePersonala": {
-    "baza": 600,
+    "h1Lunar": 300,
+    "h2Lunar": 200,
+    "dataTrecereH2": "2026-07-01",
+    "plafonAplicabilitateBrut": 4000,
+    "deducereBazaSubPlafon": 600,
+    "plafonBazaSubLei": 2000,
     "unitate": "lei/lună",
-    "descriere": "Deducere personală de bază aplicată salariului net impozabil. Variază în funcție de numărul de persoane în întreținere."
+    "descriere": "Deducerea personală suplimentară este 300 lei/lună în S1 2026 și 200 lei/lună în S2. Deducerea de bază (până la 600 lei) se aplică doar la salarii brute sub 4.000 lei și descrește progresiv."
   },
 
   "pfa": {
-    "cassPlafonAnual": {
+    "cassPlafonMinim6Salarii": {
       "valoareLei": 24300,
       "salariiMinime": 6,
-      "descriere": "Sub acest plafon anual, PFA nu datorează CASS."
+      "descriere": "Sub acest plafon anual, PFA datorează contribuție minimă CASS calculată la 6 salarii minime."
     },
     "casPlafon12Salarii": {
       "valoareLei": 48600,
       "salariiMinime": 12,
-      "descriere": "Plafon CAS aferent veniturilor între 12 și 24 salarii minime brute pe an."
+      "casDatorat": 12150,
+      "descriere": "CAS datorat pentru veniturile între 12 și 24 salarii minime brute pe an."
     },
     "casPlafon24Salarii": {
       "valoareLei": 97200,
       "salariiMinime": 24,
-      "descriere": "Plafon CAS aferent veniturilor de peste 24 salarii minime brute pe an."
+      "casDatorat": 24300,
+      "descriere": "CAS datorat pentru veniturile peste 24 salarii minime brute pe an."
+    },
+    "cassPlafonMaxim72Salarii": {
+      "valoareLei": 291600,
+      "salariiMinime": 72,
+      "cassMaxim": 29160,
+      "descriere": "Plafon maxim CASS pentru PFA cu venituri peste 72 salarii minime (crescut de la 60 în 2025)."
     },
     "cheltuieliForfetareDrepturiAutor": 0.40,
     "descriere": "Plafoanele se calculează față de salariul minim brut în vigoare la data declarării."
   },
 
   "microintreprindere": {
-    "cotaCuSalariat": 0.01,
-    "cotaFaraSalariat": 0.03,
-    "plafonCifraAfaceri": 500000,
+    "cota": 0.01,
+    "plafonCifraAfaceri": 100000,
     "plafonUnitate": "EUR/an",
+    "descriere": "Începând cu 1 ianuarie 2026, există o singură cotă de 1%. Cota de 3% a fost eliminată. Plafonul cifrei de afaceri scade de la 500.000 la 100.000 EUR.",
     "conditii": [
-      "Cifra de afaceri sub plafonul anual.",
-      "Cel puțin un salariat cu contract pe durată nedeterminată (pentru cota redusă).",
-      "Persoanele juridice nu dețin mai mult de 25% din capitalul social.",
+      "Cifra de afaceri sub 100.000 EUR pe an.",
+      "Cel puțin un salariat cu CIM pe perioadă nedeterminată sau un administrator cu contract de mandat la salariul minim.",
+      "Capitalul social nu este deținut de stat.",
+      "Asociații nu dețin peste 25% din capitalul a mai mult de o microîntreprindere.",
       "Activitatea nu intră pe lista de excluderi (consultanță peste 20% din venituri, jocuri de noroc etc.)."
     ]
   },
 
   "capitalSocial": {
-    "srlMinim": 1,
-    "saMinim": 90000,
-    "unitate": "lei",
-    "descriere": "Capital social minim la înființare."
+    "srl": {
+      "minimNou": 500,
+      "tieruri": [
+        {
+          "cifraAfaceriPanaLa": 395000,
+          "minim": 500
+        },
+        {
+          "cifraAfaceriPanaLa": 7000000,
+          "minim": 5000
+        },
+        {
+          "cifraAfaceriPesteAceastaValoare": 7000000,
+          "minim": 90000
+        }
+      ],
+      "termenAdaptare": "2027-12-15",
+      "descriere": "Pentru SRL-urile noi, capital minim 500 lei. SRL-urile existente au timp până la 15 decembrie 2027 să se conformeze noilor praguri. Vechiul minim de 1 leu a fost abrogat."
+    },
+    "sa": {
+      "minim": 90000,
+      "descriere": "Capital social minim pentru Societate pe Acțiuni."
+    },
+    "unitate": "lei"
   }
 }
