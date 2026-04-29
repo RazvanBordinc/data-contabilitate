@@ -1,7 +1,7 @@
 {
-  "version": "2026.2",
+  "version": "2026.3",
   "year": 2026,
-  "lastUpdated": "2026-04-29",
+  "lastUpdated": "2026-04-30",
   "currency": "RON",
   "notes": "Cote și plafoane fiscale aplicabile în România la data lastUpdated. Sursă: Codul fiscal, OUG 89/2025, OUG 8/2026, Legea 141/2025. Consultă întotdeauna un contabil pentru cazuri specifice.",
 
@@ -102,15 +102,24 @@
 
   "microintreprindere": {
     "cota": 0.01,
-    "plafonCifraAfaceri": 100000,
+    "plafonCifraAfaceriEur": 100000,
     "plafonUnitate": "EUR/an",
+    "consultantaMaxPctVenituri": 0.20,
+    "eurRateBNR3112": 5.0985,
+    "eurRateNote": "Curs BNR la 31 decembrie 2025, folosit pentru verificarea plafonului în 2026.",
+    "activitatiExcluse": [
+      "Bancar / asigurări / reasigurări",
+      "Piață de capital, brokeraj, intermediere",
+      "Jocuri de noroc",
+      "Petrol, gaze naturale (explorare, dezvoltare, exploatare)"
+    ],
     "descriere": "Începând cu 1 ianuarie 2026, există o singură cotă de 1%. Cota de 3% a fost eliminată. Plafonul cifrei de afaceri scade de la 500.000 la 100.000 EUR.",
     "conditii": [
       "Cifra de afaceri sub 100.000 EUR pe an.",
       "Cel puțin un salariat cu CIM pe perioadă nedeterminată sau un administrator cu contract de mandat la salariul minim.",
       "Capitalul social nu este deținut de stat.",
       "Asociații nu dețin peste 25% din capitalul a mai mult de o microîntreprindere.",
-      "Activitatea nu intră pe lista de excluderi (consultanță peste 20% din venituri, jocuri de noroc etc.)."
+      "Activitatea nu intră pe lista de excluderi (consultanță peste 20% din venituri, jocuri de noroc, bancar, asigurări, petrol-gaze)."
     ]
   },
 
